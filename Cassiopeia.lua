@@ -39,7 +39,6 @@ CassiopeiaMenu.Combo:Boolean("W", "Use W in combo", true)
 CassiopeiaMenu.Combo:Boolean("E", "Use E in combo", true)
 CassiopeiaMenu.Combo:Boolean("R", "Use R in combo", true)
 CassiopeiaMenu.Combo:Slider("RX", "X Enemies to Cast R",3,1,5,1)
-CassiopeiaMenu.Combo:Boolean("Cutlass", "Use Cutlass", true)
 CassiopeiaMenu.Combo:Boolean("Gunblade", "Use Gunblade", true)
 CassiopeiaMenu.Combo:Boolean("Randuins", "Use Randuins", true)
 
@@ -96,13 +95,13 @@ OnTick(function (myHero)
         
         --Harass
           if Mix:Mode() == "Harass" then
-            if CassiopeiaMenu.Harass.Q:Value() and Ready(_Q) and ValidTarget(target, 700) then
+            if CassiopeiaMenu.Harass.Q:Value() and Ready(_Q) and ValidTarget(target, 850) then
 				if target ~= nil then 
                                       CastTargetSpell(target, _Q)
                                 end
             end
 
-            if CassiopeiaMenu.Harass.W:Value() and Ready(_W) and ValidTarget(target, 700) then
+            if CassiopeiaMenu.Harass.W:Value() and Ready(_W) and ValidTarget(target, 800) then
 				CastSpell(_W)
             end     
           end
@@ -116,15 +115,13 @@ OnTick(function (myHero)
             end
 
            
-            if CassiopeiaMenu.Combo.Cutlass:Value() and Cutlass > 0 and Ready(Cutlass) and ValidTarget(target, 700) then
-			 CastTargetSpell(target, Cutlass)
-            end
+            
 
             if CassiopeiaMenu.Combo.E:Value() and Ready(_E) and ValidTarget(target, 700) then
 			 CastSpell(_E)
 	    end
 
-            if CassiopeiaMenu.Combo.Q:Value() and Ready(_Q) and ValidTarget(target, 700) then
+            if CassiopeiaMenu.Combo.Q:Value() and Ready(_Q) and ValidTarget(target, 850) then
 		     if target ~= nil then 
                          CastTargetSpell(target, _Q)
                      end
@@ -138,12 +135,12 @@ OnTick(function (myHero)
 
             
 
-	          if CassiopeiaMenu.Combo.W:Value() and Ready(_W) and ValidTarget(target, 700) then
+	          if CassiopeiaMenu.Combo.W:Value() and Ready(_W) and ValidTarget(target, 800) then
 			            CastSpell(_W)
 	          end
 	    
 	    
-            if CassiopeiaMenu.Combo.R:Value() and Ready(_R) and ValidTarget(target, 700) and (EnemiesAround(myHeroPos(), 700) >= CassiopeiaMenu.Combo.RX:Value()) then
+            if CassiopeiaMenu.Combo.R:Value() and Ready(_R) and ValidTarget(target, 825) and (EnemiesAround(myHeroPos(), 825) >= CassiopeiaMenu.Combo.RX:Value()) then
 			CastSpell(_R)
             end
 
@@ -173,13 +170,20 @@ OnTick(function (myHero)
 
         for _, enemy in pairs(GetEnemyHeroes()) do
                 
-                if IsReady(_Q) and ValidTarget(enemy, 700) and CassiopeiaMenu.KillSteal.Q:Value() and GetHP(enemy) < getdmg("Q",enemy) then
+                if IsReady(_Q) and ValidTarget(enemy, 850) and CassiopeiaMenu.KillSteal.Q:Value() and GetHP(enemy) < getdmg("Q",enemy) then
 		         if target ~= nil then 
                                       CastTargetSpell(target, _Q)
 		         end
                 end 
 
-                if IsReady(_E) and ValidTarget(enemy, 187) and CassiopeiaMenu.KillSteal.E:Value() and GetHP(enemy) < getdmg("E",enemy) then
+                
+		if IsReady(_W) and ValidTarget(enemy, 800) and CassiopeiaMenu.KillSteal.W:Value() and GetHP(enemy) < getdmg("W",enemy) then
+		                      CastSpell(_W)
+  
+                end	
+			
+			
+		if IsReady(_E) and ValidTarget(enemy, 700) and CassiopeiaMenu.KillSteal.E:Value() and GetHP(enemy) < getdmg("E",enemy) then
 		                      CastSpell(_E)
   
                 end
@@ -187,45 +191,39 @@ OnTick(function (myHero)
 
       if Mix:Mode() == "LaneClear" then
       	  for _,closeminion in pairs(minionManager.objects) do
-	        if CassiopeiaMenu.LaneClear.Q:Value() and Ready(_Q) and ValidTarget(closeminion, 700) then
+	        if CassiopeiaMenu.LaneClear.Q:Value() and Ready(_Q) and ValidTarget(closeminion, 850) then
 	        	CastTargetSpell(closeminion, _Q)
                 end
 
-                if CassiopeiaMenu.LaneClear.W:Value() and Ready(_W) and ValidTarget(closeminion, 700) then
+                if CassiopeiaMenu.LaneClear.W:Value() and Ready(_W) and ValidTarget(closeminion, 800) then
 	        	CastSpell(_W)
 	        end
 
-                if CassiopeiaMenu.LaneClear.E:Value() and Ready(_E) and ValidTarget(closeminion, 187) then
+                if CassiopeiaMenu.LaneClear.E:Value() and Ready(_E) and ValidTarget(closeminion, 700) then
 	        	CastSpell(_E)
 	        end
 
-                if CassiopeiaMenu.LaneClear.Tiamat:Value() and ValidTarget(closeminion, 350) then
-			CastSpell(Tiamat)
-		end
-	
-		if CassiopeiaMenu.LaneClear.RHydra:Value() and ValidTarget(closeminion, 400) then
-                        CastTargetSpell(closeminion, RHydra)
-      	        end
+               
           end
       end
         --AutoMode
         if CassiopeiaMenu.AutoMode.Q:Value() then        
-          if Ready(_Q) and ValidTarget(target, 700) then
+          if Ready(_Q) and ValidTarget(target, 850) then
 		      CastTargetSpell(target, _Q)
           end
         end 
         if CassiopeiaMenu.AutoMode.W:Value() then        
-          if Ready(_W) and ValidTarget(target, 700) then
+          if Ready(_W) and ValidTarget(target, 800) then
 	  	      CastSpell(_W)
           end
         end
         if CassiopeiaMenu.AutoMode.E:Value() then        
-	  if Ready(_E) and ValidTarget(target, 125) then
+	  if Ready(_E) and ValidTarget(target, 700) then
 		      CastSpell(_E)
 	  end
         end
         if JaxMenu.AutoMode.R:Value() then        
-	  if Ready(_R) and ValidTarget(target, 700) then
+	  if Ready(_R) and ValidTarget(target, 825) then
 		      CastSpell(_R)
 	  end
         end
@@ -243,7 +241,7 @@ end)
 OnDraw(function (myHero)
         
          if CassiopeiaMenu.Drawings.DQ:Value() then
-		DrawCircle(GetOrigin(myHero), 700, 0, 200, GoS.Red)
+		DrawCircle(GetOrigin(myHero), 850, 0, 150, GoS.Black)
 	end
 
 end)
