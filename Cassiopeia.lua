@@ -1,5 +1,5 @@
 
-local ver = "0.08"
+local ver = "0.09"
 
 if GetObjectName(GetMyHero()) ~= "Cassiopeia" then return end
 
@@ -260,7 +260,7 @@ OnTick(function (myHero)
       
       --AutoMode
       
-        if CassiopeiaMenu.AutoMode.Q:Value() and ValidTarget(enemy, 850) then        
+        if CassiopeiaMenu.AutoMode.Q:Value() and ValidTarget(target, 850) then        
                local QPred = GetPrediction(target,CassiopeiaQ)
                if QPred.hitChance > (CassiopeiaMenu.AutoMode.Qpred:Value() * 0.1) then
                          CastSkillShot(_Q, QPred.castPos)
@@ -268,7 +268,7 @@ OnTick(function (myHero)
        end
 
         
-        if CassiopeiaMenu.AutoMode.W:Value() and ValidTarget(enemy, 800) then        
+        if CassiopeiaMenu.AutoMode.W:Value() and ValidTarget(target, 800) then        
                local WPred = GetPrediction(target,CassiopeiaW)
                if WPred.hitChance > (CassiopeiaMenu.AutoMode.Wpred:Value() * 0.1) then
                          CastSkillShot(_W, WPred.castPos)
