@@ -1,5 +1,5 @@
 
-local ver = "0.10"
+local ver = "0.11"
 
 if GetObjectName(GetMyHero()) ~= "Cassiopeia" then return end
 
@@ -163,7 +163,7 @@ OnTick(function (myHero)
         
             end
 			
-	    if CassiopeiaMenu.Combo.RF:Value() and Ready(_R) and ValidTarget(target, 825) and target.IsFacing and (EnemiesAround(myHeroPos(), 825) >= CassiopeiaMenu.Combo.RX:Value()) then
+	    if IsFacing(target, 825) and CassiopeiaMenu.Combo.RF:Value() and Ready(_R) and ValidTarget(target, 825) and (EnemiesAround(myHeroPos(), 825) >= CassiopeiaMenu.Combo.RX:Value()) then
                    local RPred = GetPrediction(target,CassiopeiaR)
                    if RPred.hitChance > (CassiopeiaMenu.Combo.Rpred:Value() * 0.1) then
                              CastSkillShot(_R,RPred.castPos)
