@@ -1,5 +1,5 @@
 
-local ver = "0.04"
+local ver = "0.05"
 
 if GetObjectName(GetMyHero()) ~= "Cassiopeia" then return end
 
@@ -145,7 +145,7 @@ OnTick(function (myHero)
             if CassiopeiaMenu.Combo.W:Value() and Ready(_W) and ValidTarget(target, 800) then
                 local WPred = GetPrediction(target,CassiopeiaW)
                        if WPred.hitChance > (CassiopeiaMenu.Combo.Wpred:Value() * 0.1) then
-                                 CastTargetSpell(QPred.castPos, _W)
+                                 CastTargetSpell(WPred.castPos, _W)
                        end
             end
 	    	    
