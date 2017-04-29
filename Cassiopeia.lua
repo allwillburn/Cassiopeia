@@ -1,5 +1,5 @@
 
-local ver = "0.07"
+local ver = "0.08"
 
 if GetObjectName(GetMyHero()) ~= "Cassiopeia" then return end
 
@@ -217,7 +217,7 @@ OnTick(function (myHero)
               end
 
     
-
+      --Laneclear	
       if Mix:Mode() == "LaneClear" then
       	  for _,closeminion in pairs(minionManager.objects) do
 	        if CassiopeiaMenu.LaneClear.Q:Value() and Ready(_Q) and ValidTarget(closeminion, 850) then
@@ -225,7 +225,7 @@ OnTick(function (myHero)
                 end
 
                 if CassiopeiaMenu.LaneClear.W:Value() and Ready(_W) and ValidTarget(closeminion, 800) then
-	        	CastSkillShot(_Q, closeminion)
+	        	CastSkillShot(_W, closeminion)
 	        end
 
                 if CassiopeiaMenu.LaneClear.E:Value() and Ready(_E) and ValidTarget(closeminion, 700) then
