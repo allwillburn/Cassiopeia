@@ -1,5 +1,5 @@
 
-local ver = "0.09"
+local ver = "0.10"
 
 if GetObjectName(GetMyHero()) ~= "Cassiopeia" then return end
 
