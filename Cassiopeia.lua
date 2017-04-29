@@ -1,5 +1,5 @@
 
-local ver = "0.05"
+local ver = "0.06"
 
 if GetObjectName(GetMyHero()) ~= "Cassiopeia" then return end
 
@@ -110,12 +110,12 @@ OnTick(function (myHero)
         --Harass
           if Mix:Mode() == "Harass" then
             if CassiopeiaMenu.Harass.Q:Value() and Ready(_Q) and ValidTarget(target, 850) then		
-                                      CastTargetSpell(target, _Q)
+                                      CastSkillShot(_Q, target)
                                 
             end
 
             if CassiopeiaMenu.Harass.W:Value() and Ready(_W) and ValidTarget(target, 800) then
-				                              CastTargetSpell(target, _W)
+				       CastSkillShot(_W, target)
             end     
           end
 
@@ -134,7 +134,7 @@ OnTick(function (myHero)
             if CassiopeiaMenu.Combo.Q:Value() and Ready(_Q) and ValidTarget(target, 850) then
                  local QPred = GetPrediction(target,CassiopeiaQ)
                  if QPred.hitChance > (CassiopeiaMenu.Combo.Qpred:Value() * 0.1) then
-                           CastTargetSpell(QPred.castPos, _Q)
+                           CastSkillShot(_Q, QPred.castPos)
                  end
             end
           
@@ -145,7 +145,7 @@ OnTick(function (myHero)
             if CassiopeiaMenu.Combo.W:Value() and Ready(_W) and ValidTarget(target, 800) then
                 local WPred = GetPrediction(target,CassiopeiaW)
                        if WPred.hitChance > (CassiopeiaMenu.Combo.Wpred:Value() * 0.1) then
-                                 CastTargetSpell(WPred.castPos, _W)
+                                 CastSkillShot(_W, WPred.castPos)
                        end
             end
 	    	    
@@ -188,7 +188,7 @@ OnTick(function (myHero)
                 if IsReady(_Q) and ValidTarget(enemy, 850) and CassiopeiaMenu.KillSteal.Q:Value() and GetHP(enemy) < getdmg("Q",enemy) then
                        local QPred = GetPrediction(target,CassiopeiaQ)
                        if QPred.hitChance > (CassiopeiaMenu.KillSteal.Qpred:Value() * 0.1) then
-                                 CastTargetSpell(QPred.castPos, _Q)
+                                 CastSkillShot(_Q, QPred.castPos)
                        end
             end
 
@@ -196,7 +196,7 @@ OnTick(function (myHero)
 		         if IsReady(_W) and ValidTarget(enemy, 800) and CassiopeiaMenu.KillSteal.W:Value() and GetHP(enemy) < getdmg("W",enemy) then
                     local WPred = GetPrediction(target,CassiopeiaW)
                     if WPred.hitChance > (CassiopeiaMenu.KillSteal.Wpred:Value() * 0.1) then
-                              CastTargetSpell(QPred.castPos, _W)
+                                  CastSkillShot(_W, WPred.castPos)
                     end
              end
 			
@@ -221,11 +221,11 @@ OnTick(function (myHero)
       if Mix:Mode() == "LaneClear" then
       	  for _,closeminion in pairs(minionManager.objects) do
 	        if CassiopeiaMenu.LaneClear.Q:Value() and Ready(_Q) and ValidTarget(closeminion, 850) then
-	        	CastTargetSpell(closeminion, _Q)
+	        	CastSkillShot(_Q, closeminion)
                 end
 
                 if CassiopeiaMenu.LaneClear.W:Value() and Ready(_W) and ValidTarget(closeminion, 800) then
-	        	CastTargetSpell(closeminion, _W)
+	        	CastSkillShot(_Q, closeminion)
 	        end
 
                 if CassiopeiaMenu.LaneClear.E:Value() and Ready(_E) and ValidTarget(closeminion, 700) then
@@ -245,7 +245,7 @@ OnTick(function (myHero)
               end
 
               if CassiopeiaMenu.AutoFarm.W:Value() and Ready(_W) and ValidTarget(minion, 800) and GetCurrentHP(minion) < CalcDamage(myHero,minion,WDmg,W) then
-                  CastTargetSpell(minion, _W)
+                  CastSkillShot(_Q, minion)
               end
 
               if CassiopeiaMenu.AutoFarm.E:Value() and Ready(_E) and ValidTarget(minion, 700) and GetCurrentHP(minion) < CalcDamage(myHero,minion,EDmg,E) then
@@ -263,7 +263,7 @@ OnTick(function (myHero)
         if CassiopeiaMenu.AutoMode.Q:Value() then        
                local QPred = GetPrediction(target,CassiopeiaQ)
                if QPred.hitChance > (CassiopeiaMenu.AutoMode.Qpred:Value() * 0.1) then
-                         CastTargetSpell(QPred.castPos, _Q)
+                         CastSkillShot(_Q, QPred.castPos)
                end
        end
 
@@ -271,7 +271,7 @@ OnTick(function (myHero)
         if CassiopeiaMenu.AutoMode.W:Value() then        
                local WPred = GetPrediction(target,CassiopeiaW)
                if WPred.hitChance > (CassiopeiaMenu.AutoMode.Wpred:Value() * 0.1) then
-                         CastTargetSpell(QPred.castPos, _W)
+                         CastTargetSpell(WPred.castPos, _W)
                end
         end
     
