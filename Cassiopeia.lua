@@ -32,9 +32,10 @@ CassiopeiaMenu.Combo:Boolean("Q", "Use Q in combo", true)
 CassiopeiaMenu.Combo:Slider("Qpred", "Q Hit Chance", 3,0,10,1)
 CassiopeiaMenu.Combo:Boolean("W", "Use W in combo", true)
 CassiopeiaMenu.Combo:Slider("Wpred", "W Hit Chance", 3,0,10,1)
-CassiopeiaMenu.Combo:Boolean("E", "Use E Always", true)
+CassiopeiaMenu.Combo:Boolean("E", "Use E Always", false)
 CassiopeiaMenu.Combo:Boolean("EP", "Use E if Poisoned", true)
-CassiopeiaMenu.Combo:Boolean("R", "Use R in combo", true)
+CassiopeiaMenu.Combo:Boolean("R", "Use R Always", true)
+CassiopeiaMenu.Combo:Boolean("RF", "Use R if Facing", false)
 CassiopeiaMenu.Combo:Slider("Rpred", "R Hit Chance", 3,0,10,1)
 CassiopeiaMenu.Combo:Slider("RX", "X Enemies to Cast R",3,1,5,1)
 CassiopeiaMenu.Combo:Boolean("Gunblade", "Use Gunblade", true)
@@ -161,6 +162,15 @@ OnTick(function (myHero)
                    end
         
             end
+			
+	    if CassiopeiaMenu.Combo.RF:Value() and Ready(_R) and ValidTarget(target, 825) and target.isFacing and (EnemiesAround(myHeroPos(), 825) >= CassiopeiaMenu.Combo.RX:Value()) then
+                   local RPred = GetPrediction(target,CassiopeiaR)
+                   if RPred.hitChance > (CassiopeiaMenu.Combo.Rpred:Value() * 0.1) then
+                             CastSkillShot(_R,RPred.castPos)
+                   end
+        
+            end	
+			
 
           end
 
