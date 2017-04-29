@@ -1,11 +1,11 @@
 
-local ver = "0.02"
+local ver = "0.03"
 
 if GetObjectName(GetMyHero()) ~= "Cassiopeia" then return end
 
 require('MixLib')
 require("DamageLib")
-require("OpenPred")
+require("OpenPredict")
 require("DeftLib")
 
 function AutoUpdate(data)
