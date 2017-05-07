@@ -1,5 +1,5 @@
 
-local ver = "0.14"
+local ver = "0.15"
 
 if GetObjectName(GetMyHero()) ~= "Cassiopeia" then return end
 
@@ -260,7 +260,7 @@ OnTick(function (myHero)
                   CastTargetSpell(minion, _E)
               end
 		
-	      if CassiopeiaMenu.AutoFarm.EP:Value() and Ready(_E) and ValidTarget(minion, 700) and target.isPoisoned and GetCurrentHP(minion) < CalcDamage(myHero,minion,EDmg,E) then
+	      if CassiopeiaMenu.AutoFarm.EP:Value() and Ready(_E) and ValidTarget(minion, 700) and minion.isPoisoned and GetCurrentHP(minion) < CalcDamage(myHero,minion,EDmg,E) then
                   CastTargetSpell(minion, _E)
               end		
 			
