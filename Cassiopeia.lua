@@ -1,5 +1,5 @@
 
-local ver = "0.13"
+local ver = "0.14"
 
 if GetObjectName(GetMyHero()) ~= "Cassiopeia" then return end
 
@@ -56,7 +56,8 @@ CassiopeiaMenu.AutoMode:Slider("RX", "X Enemies to Cast R",3,1,5,1)
 CassiopeiaMenu:SubMenu("AutoFarm", "AutoFarm")
 CassiopeiaMenu.AutoFarm:Boolean("Q", "Auto Q", false)
 CassiopeiaMenu.AutoFarm:Boolean("W", "Auto W", false)
-CassiopeiaMenu.AutoFarm:Boolean("E", "Auto E", false)
+CassiopeiaMenu.AutoFarm:Boolean("E", "Auto E Always", false)
+CassiopeiaMenu.AutoFarm:Boolean("EP", "Auto E if Poisoned", false)
 
 
 
@@ -258,6 +259,11 @@ OnTick(function (myHero)
               if CassiopeiaMenu.AutoFarm.E:Value() and Ready(_E) and ValidTarget(minion, 700) and GetCurrentHP(minion) < CalcDamage(myHero,minion,EDmg,E) then
                   CastTargetSpell(minion, _E)
               end
+		
+	      if CassiopeiaMenu.AutoFarm.EP:Value() and Ready(_E) and ValidTarget(minion, 700) and target.isPoisoned and GetCurrentHP(minion) < CalcDamage(myHero,minion,EDmg,E) then
+                  CastTargetSpell(minion, _E)
+              end		
+			
           end
 
 
